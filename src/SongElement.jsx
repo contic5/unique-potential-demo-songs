@@ -34,6 +34,9 @@ function SongElement(props)
         <p>Youtube<br/>
         <a href={song.Youtube_Link}>{song.Youtube_Link}</a>
         </p>
+        <p>Context<br/>
+        <a href={song.Context}>{song.Context}</a>
+        </p>
         {song_iframe}
         </div>
     )

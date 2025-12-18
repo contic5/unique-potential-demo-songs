@@ -1,7 +1,7 @@
 /*THIS KEY IS ONLY FOR ACCESSING PUBLIC GOOGLE FILES*/
 
 //I can access read only files and files I can edit. I would need a full backend to securely store the key.
-const public_apiKey =import.meta.env.GOOGLE_SHEETS_KEY;
+const public_apiKey =import.meta.env.VITE_GOOGLE_SHEETS_KEY;
 console.log(public_apiKey);
 
 const sheetId = '10e63cDwVSWvdwLs1M-gyw_Nic9XPDHYRiW1lJGBQIdc';
@@ -36,6 +36,10 @@ function convert_to_dictionaries(rows)
 }
 export async function fetchData()
 {
+    if(public_apiKey==null||!public_apiKey)
+    {
+        return null;
+    }
     const response=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${public_apiKey}`)
     const data=await response.json()
     const rows=await data.values;
