@@ -56,29 +56,12 @@ function App()
   {
     setPage(parseInt(e.target.value));
   }
-  function get_unique_values(song_dictionaries_temp)
-  {
-    let unique_values_arr=[];
-    for(const column of columns)
-    {
-        let unique_values={};
-        for(const song_dictionary of song_dictionaries_temp)
-        {
-          unique_values[song_dictionary[column]]=true;
-        }
-        unique_values_arr.push(Object.values(unique_values));
-    }
-    return unique_values_arr;
-  }
 
-  /*Target file is in Google Sheets*/
+  /*Target file name*/
+  const file_name='Unique Potential Demo Songs.xlsx';
   /*Columns that will be used to sort data*/
   const columns=["ID","Rank","Name","Seconds"];
-  const column_names_mapped=columns.map(column=><th key={column}>{column}</th>)
-
-  const [column_handlers,setColumnHandlers]=useState(null);
   
-  /*
   const columns_mapped_head=columns.map(column =><th key={column}>{column}</th>);
   const columns_mapped_body=columns.map(column=>
     <td key={column}>
@@ -86,7 +69,6 @@ function App()
     <button onClick={() => update_sort(column,"DESC")}>DESC</button>
     </td>
   );
-  */
 
   const [ song_elements_mapped, setSong_Elements_Mapped ] = useState();
 
@@ -117,12 +99,8 @@ function App()
     async function get_data()
     {
       console.log("Fetching Google Sheets Data");
-      const song_dictionaries_temp=await fetchData()
+      const song_dictionaries_temp=await fetchData(file_name)
       setSongDictionaries(song_dictionaries_temp);
-
-      const unique_values_arr=get_unique_values(song_dictionaries_temp);
-      const column_handlers_temp=columns.map((column,index)=><ColumnHandler key={column}  unique_values={unique_values_arr[index]} column={column} update_sort={update_sort}></ColumnHandler>);
-  setColumnHandlers(column_handlers_temp);
     }
     get_data();
   },[]);
@@ -147,18 +125,18 @@ function App()
         <label htmlFor="page_top">Page</label>
         <input className="page" id="page_top" value={page} onChange={handlePage} type="number" min={1}></input>
         <table>
-        <thead>
-        <tr>
-        {column_names_mapped}
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-        {column_handlers}
-        </tr>
-        </tbody>
-        </table>
-        <div>{ song_elements_mapped }</div>
+            <thead>
+            <tr>
+            {columns_mapped_head}
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            {columns_mapped_body}
+            </tr>
+            </tbody>
+            </table>
+            <div>{ song_elements_mapped }</div>
         <label htmlFor="page_bottom">Page</label>
         <input className="page" id="page_bottom" value={page} onChange={handlePage} type="number" min={1}></input>
         </div>

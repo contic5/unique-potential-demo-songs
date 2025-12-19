@@ -20,11 +20,11 @@ function SongElement(props)
     <iframe width="560" height="315" 
     src={src} title="YouTube video player" 
     frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-    gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
     );
     return (
         <div className="border">
-        <h2>{song.Name}</h2>
+        <h2>{song.ID} {song.Name}</h2>
         <h3>Rank: {song.Rank}</h3>
         <p>{song.Seconds} Seconds</p> 
         <p>{seconds_to_time(song.Start)} - {seconds_to_time(song.End)}</p>
