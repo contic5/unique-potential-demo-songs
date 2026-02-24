@@ -1,8 +1,9 @@
 import { useState,useEffect } from 'react'
-import './mystyle.css'
+import './App.css'
 import SongElement from './SongElement';
 import fetchData from './get_song_google_sheets';
 import ColumnHandler from './ColumnHandler';
+
 function App() 
 {
   function handle_data()
@@ -142,10 +143,12 @@ function App()
 
   return (
     <>
-        <div>
         <h1>Unique Potential Demo Song Data</h1>
+        <div className="block">
         <label htmlFor="page_top">Page</label>
         <input className="page" id="page_top" value={page} onChange={handlePage} type="number" min={1}></input>
+        </div>
+
         <table>
         <thead>
         <tr>
@@ -158,7 +161,8 @@ function App()
         </tr>
         </tbody>
         </table>
-        <div>{ song_elements_mapped }</div>
+        <div className="block">{ song_elements_mapped }</div>
+        <div className="block">
         <label htmlFor="page_bottom">Page</label>
         <input className="page" id="page_bottom" value={page} onChange={handlePage} type="number" min={1}></input>
         </div>

@@ -1,4 +1,4 @@
-import './mystyle.css'
+import './SongElement.css'
 
 function SongElement(props)
 {
@@ -15,15 +15,16 @@ function SongElement(props)
     }
 
     let song=props.song;
-    const src=`https://www.youtube.com/embed/${song.Video_ID}?si=GhQ9apUa2I1n7zyR&amp;start=${song.Start}`;
+    const src=`https://www.youtube.com/embed/${song.Video_ID}?&amp;start=${song.Start}`;
     const song_iframe=(
     <iframe width="560" height="315" 
     src={src} title="YouTube video player" 
     frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
     gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
     );
+    
     return (
-        <div className="border">
+        <div className="SongElement">
         <h2>{song.ID} {song.Name}</h2>
         <h3>Rank: {song.Rank}</h3>
         <p>{song.Seconds} Seconds</p> 
